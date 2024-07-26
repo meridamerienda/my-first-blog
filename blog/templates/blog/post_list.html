@@ -3,245 +3,987 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carnitas Reu - Catálogo de Productos</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Catálogo Gaming</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        /* Estilos Generales */
         body {
-            background-color: #003366; /* Azul oscuro */
-            color: #fff; /* Color de texto blanco para contraste */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1d;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
+        /* Navbar */
         .navbar {
-            background-color: #004080; /* Azul medio para la barra de navegación */
+            background-color: #0b0c10;
         }
-
         .navbar-brand {
-            font-weight: bold;
-            font-size: 32px;
-            color: #fff; /* Color de texto blanco para el navbar */
+            color: #8fd14f !important; /* Verde claro */
+        }
+        .navbar-brand:hover {
+            color: #6b9a40 !important; /* Verde más oscuro */
+        }
+        .nav-link {
+            color: #8fd14f !important; /* Verde claro */
+        }
+        .nav-link:hover {
+            color: #6b9a40 !important; /* Verde más oscuro */
         }
 
-        .navbar-nav .nav-link {
-            font-size: 18px;
-            color: #fff;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #d1e0e0; /* Color más claro para el hover del navbar */
-        }
-
+        /* Tarjetas */
         .card {
-            border-radius: 20px;
-            overflow: hidden;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #2e2e30;
+            color: #e0e0e0;
+            border: 1px solid #6b9a40; /* Verde más oscuro */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
-
+        .card-footer {
+            background-color: #1d1d1d;
+            border-top: 1px solid #6b9a40; /* Verde más oscuro */
+        }
         .card-img-top {
-            border-bottom: 4px solid #004080; /* Borde azul para separar la imagen del contenido */
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #6b9a40; /* Verde más oscuro */
         }
 
-        .card-body {
-            background-color: #00509e; /* Azul más claro para el fondo de las tarjetas */
-            color: #fff; /* Texto blanco en las tarjetas */
-            padding: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .card-text {
-            font-size: 18px;
-        }
-
+        /* Botones */
         .btn-primary {
-            background-color: #003366; /* Azul oscuro para los botones */
+            background-color: #6b9a40; /* Verde más oscuro */
             border: none;
-            border-radius: 25px;
-            padding: 10px 20px;
-            font-size: 16px;
+            border-radius: 5px;
         }
-
         .btn-primary:hover {
-            background-color: #004080; /* Azul medio para el hover del botón */
+            background-color: #8fd14f; /* Verde claro */
+            color: #0b0c10;
         }
 
-        .modal-content {
-            background-color: #00509e; /* Azul claro para el fondo del modal */
-            color: #fff; /* Texto blanco en el modal */
-            border-radius: 15px;
+        /* Encabezados */
+        h1, h2, h3, h4, h5, h6 {
+            color: #8fd14f; /* Verde claro */
+            text-shadow: 1px 1px 2px #0b0c10;
         }
 
-        .modal-header {
-            border-bottom: 1px solid #003366; /* Borde azul oscuro para el header del modal */
+        /* Formularios */
+        .form-control {
+            background-color: #1d1d1d;
+            color: #e0e0e0;
+            border: 1px solid #6b9a40; /* Verde más oscuro */
+            border-radius: 5px;
+        }
+        .form-control::placeholder {
+            color: #e0e0e0;
         }
 
-        .modal-title {
-            font-weight: bold;
-            font-size: 24px;
-        }
-
-        .close {
-            color: #fff; /* Color blanco para el botón de cerrar */
-            font-size: 30px;
-        }
-
-        .modal-footer {
-            border-top: 1px solid #003366; /* Borde azul oscuro para el footer del modal */
-        }
-
-        .modal-body img {
+        /* Mapa */
+        #map {
+            height: 400px;
+            border: 2px solid #6b9a40; /* Verde más oscuro */
             border-radius: 10px;
         }
 
-        .modal-body h1 {
-            font-size: 28px;
+        /* Espaciado */
+        .container {
+            margin-bottom: 50px;
         }
 
-        .modal-body p {
-            font-size: 18px;
+        /* Espaciado entre secciones */
+        .my-4 {
+            padding-top: 50px;
+            padding-bottom: 50px;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Carnitas Reu</a>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">Catálogo Gaming</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Catálogo <span class="sr-only">(current)</span></a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#laptops">Laptops y Computadoras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#consolas">Consolas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tienda-fisica">Tienda Física</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="container mt-5">
+    <div id="laptops" class="container products-section">
+        <h1>Laptops y Computadoras de Escritorio</h1>
         <div class="row">
-            <!-- Producto 1 -->
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://www.elfinanciero.com.mx/resizer/dbUUn9k5KsD0hYX2ZHm55u3Yxa0=/400x267/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/elfinanciero/HG6HCGEULBGBFPKD3UBHOT6WM4.jpg" class="card-img-top" alt="Carne de Cerdo">
+            <!-- Laptop 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://assets3.razerzone.com/2qIEzE6PovR0jcvcBUI6HVJQVKM=/300x300/https%3A%2F%2Fhybrismediaprod.blob.core.windows.net%2Fsys-master-phoenix-images-container%2Fhaf%2Fh7b%2F9720377704478%2Fblade14-p10-black-500x500.png" alt="Laptop 1">
                     <div class="card-body">
-                        <h5 class="card-title">Carne de Coche</h5>
-                        <p class="card-text">Precio: $12.50</p>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#productModal1">Ver detalles</a>
+                        <h4 class="card-title">Laptop 1</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop1" class="btn btn-primary">Ver detalles</a>
                     </div>
                 </div>
             </div>
-            <!-- Producto 2 -->
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://i.blogs.es/7fc463/tapones1/450_1000.jpg" class="card-img-top" alt="Refrescos">
+            <!-- Laptop 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop2.jpg" alt="Laptop 2">
                     <div class="card-body">
-                        <h5 class="card-title">Refrescos</h5>
-                        <p class="card-text">Precio: $1.99</p>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#productModal2">Ver detalles</a>
+                        <h4 class="card-title">Laptop 2</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop2" class="btn btn-primary">Ver detalles</a>
                     </div>
                 </div>
             </div>
-            <!-- Producto 3 -->
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://pollocolombiano.com/wp-content/uploads/2023/09/tres-presas-de-pollo-frito-1.png" class="card-img-top" alt="Pollo">
+            <!-- Laptop 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop3.jpg" alt="Laptop 3">
                     <div class="card-body">
-                        <h5 class="card-title">Pollo</h5>
-                        <p class="card-text">Precio: $8.75</p>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#productModal3">Ver detalles</a>
+                        <h4 class="card-title">Laptop 3</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop3" class="btn btn-primary">Ver detalles</a>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Modal de Detalles del Producto 1 -->
-        <div class="modal fade" id="productModal1" tabindex="-1" role="dialog" aria-labelledby="productModalLabel1" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="productModalLabel1">Carne de Cerdo</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <!-- Laptop 4 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop4.jpg" alt="Laptop 4">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 4</h4>
+                        <p class="card-text"></p>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="https://www.elfinanciero.com.mx/resizer/dbUUn9k5KsD0hYX2ZHm55u3Yxa0=/400x267/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/elfinanciero/HG6HCGEULBGBFPKD3UBHOT6WM4.jpg" class="img-fluid" alt="Carne de Cerdo">
-                            </div>
-                            <div class="col-md-6">
-                                <h1>Carne de Cerdo</h1>
-                                <p>Precio: $12.50</p>
-                                <p>Descripción: Deliciosa carne de Cerdo de alta calidad.</p>
-                                <button class="btn btn-primary">Agregar al carrito</button>
-                            </div>
-                        </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop4" class="btn btn-primary">Ver detalles</a>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Modal de Detalles del Producto 2 -->
-        <div class="modal fade" id="productModal2" tabindex="-1" role="dialog" aria-labelledby="productModalLabel2" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="productModalLabel2">Refrescos</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <!-- Laptop 5 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop5.jpg" alt="Laptop 5">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 5</h4>
+                        <p class="card-text"></p>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="https://i.blogs.es/7fc463/tapones1/450_1000.jpg" class="img-fluid" alt="Refrescos">
-                            </div>
-                            <div class="col-md-6">
-                                <h1>Refrescos</h1>
-                                <p>Precio: $1.99</p>
-                                <p>Descripción: Refresco de diferentes sabores.</p>
-                                <button class="btn btn-primary">Agrega al carrito</button>
-                            </div>
-                        </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop5" class="btn btn-primary">Ver detalles</a>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Modal de Detalles del Producto 3 -->
-        <div class="modal fade" id="productModal3" tabindex="-1" role="dialog" aria-labelledby="productModalLabel3" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="productModalLabel3">Pollo</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <!-- Laptop 6 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop6.jpg" alt="Laptop 6">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 6</h4>
+                        <p class="card-text"></p>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="https://pollocolombiano.com/wp-content/uploads/2023/09/tres-presas-de-pollo-frito-1.png" class="img-fluid" alt="Pollo">
-                            </div>
-                            <div class="col-md-6">
-                                <h1>Pollo</h1>
-                                <p>Precio: $8.75</p>
-                                <p>Descripción: Pollo frito elige tu pieza favorita.</p>
-                                <button class="btn btn-primary">Agregar al carrito</button>
-                            </div>
-                        </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop6" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop 7 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop7.jpg" alt="Laptop 7">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 7</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop7" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop 8 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop8.jpg" alt="Laptop 8">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 8</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop8" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop 9 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop9.jpg" alt="Laptop 9">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 9</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop9" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop 10 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop10.jpg" alt="Laptop 10">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 10</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop10" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop 11 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop11.jpg" alt="Laptop 11">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 11</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop11" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop 12 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop12.jpg" alt="Laptop 12">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 12</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop12" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop 13 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop13.jpg" alt="Laptop 13">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 13</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop13" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop 14 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://example.com/laptop14.jpg" alt="Laptop 14">
+                    <div class="card-body">
+                        <h4 class="card-title">Laptop 14</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_laptop14" class="btn btn-primary">Ver detalles</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div id="consolas" class="container products-section">
+        <h1>Consolas de Videojuegos</h1>
+        <div class="row">
+            <!-- Consola 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://assets2.razerzone.com/images/pnx.assets/67293701b62bc7ca170d1c62aeaae5b1/razer-wolverine-v2-chroma_availablein_desktop_1920x530.jpg" alt="Consola 1">
+                    <div class="card-body">
+                        <h4 class="card-title">Xbox</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola1" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.easygames.com.gt/cdn/shop/products/dualsense-negro-ps5-828234.jpg?v=1659517653&width=360" alt="Consola 2">
+                    <div class="card-body">
+                        <h4 class="card-title">PS5</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola2" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://i.ebayimg.com/thumbs/images/g/sKcAAOSwBbBlhCs~/s-l225.webp" alt="Consola 3">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 3</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola3" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 4 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://i.ebayimg.com/thumbs/images/g/fHMAAOSwKtVW0vMz/s-l225.webp" alt="Consola 4">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 4</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola4" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 5 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://i.ebayimg.com/thumbs/images/g/MtsAAOSwzJ5XZ~Oi/s-l225.webp" alt="Consola 5">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 5</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola5" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 6 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.radioshackla.com/media/catalog/product/4/6/464092900011_2_.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=200&width=200&canvas=200:200" alt="Consola 6">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 6</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola6" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 7 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.radioshackla.com/media/catalog/product/4/6/464093100014.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=200&width=200&canvas=200:200" alt="Consola 7">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 7</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola7" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 8 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.easygames.com.gt/cdn/shop/products/control-pro-powera-crash-nintendo-switch-585067.jpg?v=1623001720&width=360" alt="Consola 8">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 8</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola8" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 9 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.easygames.com.gt/cdn/shop/files/audifonos-wireless-bluetooth-971043.jpg?v=1719160092&width=360" alt="Consola 9">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 9</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola9" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 10 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.easygames.com.gt/cdn/shop/files/control-inalambrico-switch-pxn-9607x-805736.jpg?v=1721273558&width=360" alt="Consola 10">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 10</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola10" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 11 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.easygames.com.gt/cdn/shop/files/control-pulse-red-xbox-906145.jpg?v=1720966095&width=360" alt="Consola 11">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 11</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola11" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 12 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.easygames.com.gt/cdn/shop/products/dualsense-camo-ps5-950374.jpg?v=1692371336&width=360" alt="Consola 12">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 12</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola12" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 13 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.easygames.com.gt/cdn/shop/products/cubierta-original-negra-cover-ps5-488583.webp?v=1692371332&width=360" alt="Consola 13">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 13</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola13" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Consola 14 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="https://www.easygames.com.gt/cdn/shop/products/nyxi-wizard-wireless-joy-pad-controller-switch-337880.jpg?v=1688604485&width=360" alt="Consola 14">
+                    <div class="card-body">
+                        <h4 class="card-title">Consola 14</h4>
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#detalle_consola14" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="detalle_laptop1" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://assets3.razerzone.com/2qIEzE6PovR0jcvcBUI6HVJQVKM=/300x300/https%3A%2F%2Fhybrismediaprod.blob.core.windows.net%2Fsys-master-phoenix-images-container%2Fhaf%2Fh7b%2F9720377704478%2Fblade14-p10-black-500x500.png" alt="Laptop 1">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 1</h3>
+                <p>Procesador AMD Ryzen™ 9 8945HS
+                    GPU para computadora portátil Nvidia® GeForce® RTX™ 4070 (140 W TGP)
+                    Memoria DDR5 de 5600 MHz
+                    Inicio de Windows 11</p>
+                <h4>Precio: $2,500</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="detalle_laptop2" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop2.jpg" alt="Laptop 2">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 2</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,500</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detalles para las 12 laptops adicionales -->
+    <!-- Laptop 3 -->
+    <div id="detalle_laptop3" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop3.jpg" alt="Laptop 3">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 3</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,800</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 4 -->
+    <div id="detalle_laptop4" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop4.jpg" alt="Laptop 4">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 4</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,700</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 5 -->
+    <div id="detalle_laptop5" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop5.jpg" alt="Laptop 5">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 5</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,600</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 6 -->
+    <div id="detalle_laptop6" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop6.jpg" alt="Laptop 6">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 6</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,900</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 7 -->
+    <div id="detalle_laptop7" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop7.jpg" alt="Laptop 7">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 7</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,750</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 8 -->
+    <div id="detalle_laptop8" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop8.jpg" alt="Laptop 8">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 8</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,400</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 9 -->
+    <div id="detalle_laptop9" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop9.jpg" alt="Laptop 9">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 9</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $2,200</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 10 -->
+    <div id="detalle_laptop10" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop10.jpg" alt="Laptop 10">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 10</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,900</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 11 -->
+    <div id="detalle_laptop11" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop11.jpg" alt="Laptop 11">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 11</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,700</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 12 -->
+    <div id="detalle_laptop12" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop12.jpg" alt="Laptop 12">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 12</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,850</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 13 -->
+    <div id="detalle_laptop13" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://example.com/laptop13.jpg" alt="Laptop 13">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 13</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $1,950</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Laptop 14 -->
+    <div id="detalle_laptop14" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="" alt="Laptop 14">
+            </div>
+            <div class="col-md-6">
+                <h3>Laptop 14</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $2,300</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="detalle_consola1" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://assets2.razerzone.com/images/pnx.assets/67293701b62bc7ca170d1c62aeaae5b1/razer-wolverine-v2-chroma_availablein_desktop_1920x530.jpg" alt="Consola 1">
+            </div>
+            <div class="col-md-6">
+                <h3>Xbox</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $500</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="detalle_consola2" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.easygames.com.gt/cdn/shop/products/dualsense-negro-ps5-828234.jpg?v=1659517653&width=360" alt="Consola 2">
+            </div>
+            <div class="col-md-6">
+                <h3>PS5</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $600</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detalles para las 12 consolas adicionales -->
+    <!-- Consola 3 -->
+    <div id="detalle_consola3" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://i.ebayimg.com/thumbs/images/g/sKcAAOSwBbBlhCs~/s-l225.webp" alt="Consola 3">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 3</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $550</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 4 -->
+    <div id="detalle_consola4" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://i.ebayimg.com/thumbs/images/g/fHMAAOSwKtVW0vMz/s-l225.webp" alt="Consola 4">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 4</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $580</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 5 -->
+    <div id="detalle_consola5" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://i.ebayimg.com/thumbs/images/g/MtsAAOSwzJ5XZ~Oi/s-l225.webp" alt="Consola 5">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 5</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $600</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 6 -->
+    <div id="detalle_consola6" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.radioshackla.com/media/catalog/product/4/6/464092900011_2_.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=200&width=200&canvas=200:200" alt="Consola 6">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 6</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $620</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 7 -->
+    <div id="detalle_consola7" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.radioshackla.com/media/catalog/product/4/6/464093100014.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=200&width=200&canvas=200:200" alt="Consola 7">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 7</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $630</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 8 -->
+    <div id="detalle_consola8" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.easygames.com.gt/cdn/shop/products/control-pro-powera-crash-nintendo-switch-585067.jpg?v=1623001720&width=360" alt="Consola 8">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 8</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $650</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 9 -->
+    <div id="detalle_consola9" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.easygames.com.gt/cdn/shop/files/audifonos-wireless-bluetooth-971043.jpg?v=1719160092&width=360" alt="Consola 9">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 9</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $670</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 10 -->
+    <div id="detalle_consola10" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.easygames.com.gt/cdn/shop/files/control-inalambrico-switch-pxn-9607x-805736.jpg?v=1721273558&width=360" alt="Consola 10">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 10</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $690</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 11 -->
+    <div id="detalle_consola11" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.easygames.com.gt/cdn/shop/files/control-pulse-red-xbox-906145.jpg?v=1720966095&width=360" alt="Consola 11">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 11</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $710</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 12 -->
+    <div id="detalle_consola12" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.easygames.com.gt/cdn/shop/products/dualsense-camo-ps5-950374.jpg?v=1692371336&width=360" alt="Consola 12">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 12</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $730</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 13 -->
+    <div id="detalle_consola13" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.easygames.com.gt/cdn/shop/products/cubierta-original-negra-cover-ps5-488583.webp?v=1692371332&width=360" alt="Consola 13">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 13</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $750</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+    <!-- Consola 14 -->
+    <div id="detalle_consola14" class="container my-4">
+        <h1>Detalles del Producto</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="https://www.easygames.com.gt/cdn/shop/products/nyxi-wizard-wireless-joy-pad-controller-switch-337880.jpg?v=1688604485&width=360" alt="Consola 14">
+            </div>
+            <div class="col-md-6">
+                <h3>Consola 14</h3>
+                <p>Características del producto...</p>
+                <h4>Precio: $780</h4>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contacto -->
+    <div id="contacto" class="container my-4">
+        <h2>Contacto</h2>
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" placeholder="Tu correo electrónico">
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="3" placeholder="Tu mensaje"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Tienda Física -->
+    <div id="tienda-fisica" class="container my-4">
+        <h1>Tienda Física</h1>
+        <p>Visítanos en nuestra ubicación:</p>
+        <address>
+            <strong>Dirección de la Tienda</strong><br>
+            Calle Falsa 123, Ciudad, País<br>
+            <a href="mailto:contacto@tienda.com">contacto@tienda.com</a><br>
+            Teléfono: +123 456 7890
+        </address>
+        <div id="map" class="my-4">
+            <!-- Aquí puedes agregar un mapa embebido de Google Maps -->
+            <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light text-center py-3">
+        <p>&copy; 2024 Tu Tienda de Electrónica. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
